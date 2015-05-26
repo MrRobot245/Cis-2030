@@ -1,0 +1,43 @@
+00008000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.15.02
+Created On: 2014-11-07 2:46:04 PM
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :
+00000000                             3  * Written by :
+00000000                             4  * Date       :
+00000000                             5  * Description:
+00000000                             6  *-----------------------------------------------------------
+00008000                             7      ORG    $8000
+00008000                             8  START:
+00008000  3F39 0000802A              9      move.w x,-(sp)  
+00008006  4EB9 0000800C             10      jsr solveQuad
+0000800C                            11  
+0000800C  302F 0001                 12  solveQuad   move.w 1(sp),d0
+00008010  3200                      13      move.w d0,d1
+00008012  C3FC 0005                 14      muls #5,d1
+00008016  C3C0                      15      muls d0,d1
+00008018                            16  
+00008018  3439 0000802A             17      move x,d2
+0000801E  C5FC 0002                 18      muls #2,d2
+00008022  9242                      19      sub.w d2,d1
+00008024                            20  
+00008024  5C41                      21      add.w #6,d1              
+00008026                            22  
+00008026                            23  
+00008026  FFFF FFFF                 24      SIMHALT             ; halt simulator
+0000802A                            25  
+0000802A                            26  * Put variables and constants here
+0000802A= 0001                      27  x dc.w  1
+0000802C                            28      END    START        ; last line of source
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+SOLVEQUAD           800C
+START               8000
+X                   802A

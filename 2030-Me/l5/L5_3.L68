@@ -1,0 +1,43 @@
+00008000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.15.02
+Created On: 2014-10-17 5:04:14 PM
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :
+00000000                             3  * Written by :
+00000000                             4  * Date       :
+00000000                             5  * Description:
+00000000                             6  *-----------------------------------------------------------
+00008000                             7      ORG    $8000
+00008000                             8  START:                  ; first instruction of program
+00008000                             9  
+00008000                            10  * Put program code here
+00008000  3639 00009000             11      MOVE.W  hexVal,D3
+00008006  0643 0030                 12      ADDI.W #$30,D3
+0000800A                            13  
+0000800A  0C43 0039                 14      CMPI.W  #$39,D3
+0000800E  6F00 0004                 15      BLE  EXT
+00008012  5E43                      16      ADD.W #$07,D3
+00008014                            17  
+00008014  4E4E                      18  EXT TRAP #14
+00008016                            19  
+00008016                            20      
+00008016                            21  * Put variables and constants here
+00008016                            22  
+00009000                            23      ORG $9000
+00009000= 000A                      24  hexVal  DC.W    $A
+00009002= 000B                      25  charCode DC.W   $B
+00009004                            26  
+00009004                            27      END    START        ; last line of source
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+CHARCODE            9002
+EXT                 8014
+HEXVAL              9000
+START               8000

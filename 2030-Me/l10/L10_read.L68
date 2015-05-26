@@ -1,0 +1,46 @@
+00008000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.15.02
+Created On: 2014-11-21 2:47:32 PM
+
+00000000                             1  
+00000000                             2  
+00008000                             3          ORG     $8000
+00008000                             4  
+00008000  =0000C001                  5  DUART   EQU     $C001
+00008000  =00000002                  6  SRA     EQU     2
+00008000  =00000006                  7  RBA     EQU     6
+00008000                             8  
+00008000  41F9 0000C001              9          LEA     DUART,A0
+00008006  227C 00009000             10          MOVEA.L #MESSAGE,A1
+0000800C                            11  
+0000800C  1E28 0002                 12  LOOP    MOVE.B  SRA(A0),D7
+00008010  0207 0001                 13          ANDI.B  #1,D7
+00008014  67F6                      14          BEQ     LOOP
+00008016  1028 0006                 15          MOVE.B  RBA(A0),D0
+0000801A  B03C 000D                 16          CMP.B   #13,D0
+0000801E  6700 0006                 17          BEQ     EXIT
+00008022  12C0                      18          MOVE.B  D0,(A1)+
+00008024  60E6                      19          BRA     LOOP
+00008026                            20  
+00008026  4E4E                      21  EXIT    TRAP #14
+00008028                            22  
+00008028                            23  
+00009000                            24          ORG     $9000
+00009000                            25  MESSAGE DS.B 10
+0000900A                            26  
+0000900A                            27  
+0000900A                            28          END     $8000
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+DUART               C001
+EXIT                8026
+LOOP                800C
+MESSAGE             9000
+RBA                 6
+SRA                 2

@@ -1,0 +1,55 @@
+00008000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.15.02
+Created On: 2014-10-24 5:39:02 PM
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :
+00000000                             3  * Written by :
+00000000                             4  * Date       :
+00000000                             5  * Description:
+00000000                             6  *-----------------------------------------------------------
+00008000                             7      ORG    $8000
+00008000                             8  START:                  ; first instruction of program
+00008000                             9  
+00008000                            10  * Put program code here
+00008000  41F9 00009000             11      LEA String1,A0
+00008006  43F9 00009020             12      LEA String2,A1
+0000800C  103C 00FF                 13      MOVE.B #$FF,D0
+00008010                            14      
+00008010  1218                      15  LOOP MOVE.B (A0)+,D1
+00008012  1419                      16      MOVE.B (A1)+,D2
+00008014  B438 3064                 17      CMP.B '0d',D2
+00008018  6700 000E                 18      BEQ EXIT
+0000801C  B401                      19      CMP.B D1,D2
+0000801E  6600 0004                 20      BNE NEQ
+00008022  60EC                      21      BRA LOOP
+00008024                            22   
+00008024                            23  
+00008024  103C 0000                 24  NEQ MOVE.B #$00,D0
+00008028                            25  
+00008028  4E4E                      26  EXIT TRAP #14
+0000802A                            27  
+0000802A                            28  * Put variables and constants here
+0000802A                            29  
+00009000                            30      ORG $9000
+00009000= 62 6F 62 58               31  String1 DC.B 'bobX'
+00009020                            32      ORG $9020
+00009020= 62 6F 62 59               33  String2 DC.B 'bobY'
+00009024                            34  
+00009024                            35  
+00009024                            36  
+00009024                            37      END    START        ; last line of source
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+EXIT                8028
+LOOP                8010
+NEQ                 8024
+START               8000
+STRING1             9000
+STRING2             9020

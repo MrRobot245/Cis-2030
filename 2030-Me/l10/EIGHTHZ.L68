@@ -1,0 +1,55 @@
+00008000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.15.02
+Created On: 19/11/2014 2:06:50 PM
+
+00000000                             1  
+00000000                             2  
+00000000  =0000C001                  3  DUART   EQU $C001
+00000000  =0000000A                  4  ISR EQU $A
+00000000  =0000001E                  5  STOP    EQU $1E
+00000000  =0000001C                  6  OPR_SET EQU $1C
+00000000  =0000001E                  7  OPR_CLR EQU $1E
+00000000  =00000008                  8  ACR EQU 8
+00000000  =0000000C                  9  CTUR    EQU 12
+00000000  =0000000E                 10  CTLR    EQU 14
+00000000  =0000001A                 11  OPCR    EQU 26
+00000000  =00003840                 12  PRELOAD EQU 14400
+00000000                            13  
+00008000                            14      ORG $8000
+00008000  207C 0000C001             15  EIHZ    MOVEA.L #DUART,A0
+00008006                            16  
+00008006  3038 3840                 17      MOVE.W  PRELOAD,D0
+0000800A  0188 000C                 18      MOVEP.W D0,CTUR(A0)
+0000800E  117C 0070 0008            19      MOVE.B  #$70,ACR(A0)
+00008014  117C 0004 001A            20      MOVE.B  #$04,OPCR(A0)
+0000801A                            21  
+0000801A  1028 000A                 22  LOOP    MOVE.B  ISR(A0),D0
+0000801E  C03C 0008                 23      AND.B   #8,D0
+00008022  1140 001E                 24      MOVE.B  D0,OPR_CLR(A0)
+00008026  67F2                      25      BEQ LOOP
+00008028                            26  
+00008028  4600                      27      NOT.B   D0
+0000802A  1140 001C                 28      MOVE.B  D0,OPR_SET(A0)
+0000802E  60EA                      29      BRA LOOP
+00008030                            30  
+00008030                            31      END EIHZ
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+ACR                 8
+CTLR                E
+CTUR                C
+DUART               C001
+EIHZ                8000
+ISR                 A
+LOOP                801A
+OPCR                1A
+OPR_CLR             1E
+OPR_SET             1C
+PRELOAD             3840
+STOP                1E

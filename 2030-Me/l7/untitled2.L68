@@ -1,0 +1,37 @@
+00009500 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.15.02
+Created On: 2014-10-31 3:03:10 PM
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :
+00000000                             3  * Written by :
+00000000                             4  * Date       :
+00000000                             5  * Description:
+00000000                             6  *-----------------------------------------------------------
+00009000                             7      ORG $9000
+00009000= 00000000                   8  RESULT      DC.L 0
+00009004                             9  
+00009500                            10              ORG         $9500
+Line 11 ERROR: Invalid syntax
+00009500                            11  START       ANDI.W
+00009500  4FF9 00008100             12              LEA $8100,A7
+00009506  4EB9 0000950E             13              JSR GENMUL
+0000950C  4E4E                      14              TRAP #14
+0000950E  2F00                      15  GENMUL      MOVE.L D0,-(A7) 
+00009510  2001                      16      MOVE.L      D1,D0
+00009512  C1C2                      17      MULS        D2,D0
+00009514  23C0 00009000             18      MOVE.L      D0,RESULT
+0000951A  201F                      19      MOVE.L      (A7)+,D0
+0000951C  4E75                      20      RTS
+0000951E                            21      END START
+
+1 error detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+GENMUL              950E
+RESULT              9000
+START               9500

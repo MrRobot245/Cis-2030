@@ -1,0 +1,50 @@
+00008000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.15.02
+Created On: 2014-10-31 3:49:18 PM
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :
+00000000                             3  * Written by :
+00000000                             4  * Date       :
+00000000                             5  * Description:
+00000000                             6  *-----------------------------------------------------------
+00008000                             7      ORG    $8000
+00008000                             8  START:                  ; first instruction of program
+00008000  303C 0028                  9      MOVE.W #40,D0
+00008004  323C 0032                 10      MOVE.W #50,D1
+00008008  3601                      11      MOVE.W D1,D3
+0000800A  E24B                      12      LSR.W #1,D3
+0000800C  6500 0014                 13      BCS ODD
+00008010                            14     
+00008010                            15  
+00008010                            16      
+00008010  E340                      17  LOOP ASL.W #1,D0
+00008012  E241                      18      ASR.W #1,D1
+00008014  3601                      19      MOVE.W D1,D3
+00008016  E24B                      20      LSR.W #1,D3
+00008018  6500 0008                 21      BCS ODD
+0000801C  B27C 0001                 22      CMP.W #1,D1
+00008020  6EEE                      23      BGT LOOP
+00008022                            24      
+00008022  D440                      25  ODD ADD.W D0,D2
+00008024  B23C 0001                 26    CMP.B #$1,D1
+00008028  6EE6                      27    BGT LOOP
+0000802A                            28  
+0000802A                            29  
+0000802A                            30  
+0000802A  4E4E                      31  EXIT    TRAP #14
+0000802C                            32  * Put variables and constants here
+0000802C                            33  
+0000802C                            34      END    START        ; last line of source
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+EXIT                802A
+LOOP                8010
+ODD                 8022
+START               8000

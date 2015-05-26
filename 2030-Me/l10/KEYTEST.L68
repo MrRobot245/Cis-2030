@@ -1,0 +1,50 @@
+00008000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.15.02
+Created On: 19/11/2014 12:59:47 AM
+
+00000000                             1  *L11 David Wakulewicz NOV 27TH 2012
+00000000                             2  
+00000000  =0000C001                  3  DUART   EQU $00C001
+00000000  =0000001A                  4  IPR EQU $1A
+00000000  =0000001C                  5  OPR_SET EQU $1C
+00000000  =0000001E                  6  OPR_CLR EQU $1E
+00000000  =00000002                  7  SRA EQU 2
+00000000  =00000006                  8  RBA EQU 6
+00000000                             9  
+00008000                            10      ORG $8000
+00008000  207C 0000C001             11  WIRE681 MOVEA.L #DUART,A0
+00008006                            12  
+00008006  1E28 0002                 13  LOOP    MOVE.B  SRA(A0),D7
+0000800A  0207 0001                 14      ANDI.B  #1,D7
+0000800E  67F6                      15      BEQ LOOP
+00008010                            16  
+00008010  1028 0006                 17      MOVE.B  RBA(A0),D0
+00008014  B03C 0071                 18      CMP.B   #113,D0
+00008018  6700 0014                 19      BEQ EXIT
+0000801C  6100 0004                 20      BSR OUT681
+00008020  60E4                      21      BRA LOOP
+00008022                            22  
+00008022  1140 001E                 23  OUT681  MOVE.B  D0,OPR_CLR(A0)
+00008026  4600                      24      NOT.B   D0
+00008028  1140 001C                 25      MOVE.B  D0,OPR_SET(A0)
+0000802C  4E75                      26      RTS
+0000802E  4E4E                      27  EXIT    TRAP    #14
+00008030                            28      END WIRE681
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+DUART               C001
+EXIT                802E
+IPR                 1A
+LOOP                8006
+OPR_CLR             1E
+OPR_SET             1C
+OUT681              8022
+RBA                 6
+SRA                 2
+WIRE681             8000

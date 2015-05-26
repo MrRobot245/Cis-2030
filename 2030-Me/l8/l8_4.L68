@@ -1,0 +1,73 @@
+00008000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.15.02
+Created On: 2014-11-07 6:08:44 PM
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :
+00000000                             3  * Written by :
+00000000                             4  * Date       :
+00000000                             5  * Description:
+00000000                             6  *-----------------------------------------------------------
+00008000                             7      ORG    $8000
+00008000                             8  START:
+00008000  3F39 00009000              9      move.w x,-(sp)
+00008006  3F39 00009002             10      move.w y,-(sp) 
+0000800C  41F9 00009004             11      lea z,A0
+00008012  2F08                      12      move.l A0,-(sp) 
+00008014                            13      
+00008014  4EB9 00008020             14      jsr squared
+0000801A  4FEF 0006                 15      lea 6(sp),sp
+0000801E  4E4E                      16      trap #14
+00008020                            17  
+00008020  4E56 FFFA                 18  squared  link A6,#-6 
+00008024  48E7 FC80                 19      movem.l d0-d5/A0,-(sp) 
+00008028                            20      
+00008028  302E 000E                 21      move.w 14(A6),D0
+0000802C  322E 000C                 22      move.w 12(A6),D1
+00008030  206E 0008                 23      move.l 8(A6),A0
+00008034                            24      
+00008034  362E FFFE                 25      MOVE.W -2(a6),d3
+00008038  382E FFFC                 26      move.w -4(a6),d4
+0000803C  3A2E FFFA                 27      move.w -6(a6),d5
+00008040                            28      
+00008040  3600                      29      move.w d0,d3
+00008042  3801                      30      move.w d1,d4
+00008044                            31      
+00008044  C7C3                      32      MULS D3,D3
+00008046  C9C4                      33      MULS D4,D4
+00008048                            34      
+00008048  3A3C 0002                 35      move.w #2,d5
+0000804C  CBC0                      36      muls d0,d5
+0000804E  CBC1                      37      muls d1,d5
+00008050                            38  
+00008050  DA44                      39      add.w d4,d5
+00008052  DA43                      40      add.w d3,d5 
+00008054                            41  
+00008054  2085                      42      move.l d5,(A0)
+00008056  4CDF 013F                 43      movem.l (sp)+,d0-d5/A0 
+0000805A  4E5E                      44      unlk A6
+0000805C                            45     
+0000805C  4E75                      46      rts             
+0000805E                            47  
+0000805E                            48  
+0000805E  FFFF FFFF                 49      SIMHALT             ; halt simulator
+00008062                            50  
+00008062                            51  * Put variables and constants here
+00009000                            52      org $9000
+00009000= 0050                      53  x dc.w  80
+00009002= FFBA                      54  y dc.w  -70
+00009004                            55  z ds.l 1
+00009008                            56      END  START        ; last line of source
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+SQUARED             8020
+START               8000
+X                   9000
+Y                   9002
+Z                   9004

@@ -1,0 +1,47 @@
+00008000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.15.02
+Created On: 2014-11-07 3:14:44 PM
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :
+00000000                             3  * Written by :
+00000000                             4  * Date       :
+00000000                             5  * Description:
+00000000                             6  *-----------------------------------------------------------
+00008000                             7      ORG    $8000
+00008000                             8  START:
+00008000  3F39 00009000              9      move.w x,-(sp)  
+00008006  4EB9 00008012             10      jsr solveQuad
+0000800C  4FEF 0002                 11      lea 2(sp),sp
+00008010  4E4E                      12      trap #14
+00008012                            13  
+00008012  302F 0004                 14  solveQuad   move.w 4(sp),d0
+00008016  3200                      15      move.w d0,d1
+00008018  C3FC 0005                 16      muls #5,d1
+0000801C  C3C0                      17      muls d0,d1
+0000801E                            18  
+0000801E  3439 00009000             19      move x,d2
+00008024  C5FC 0002                 20      muls #2,d2
+00008028  9242                      21      sub.w d2,d1
+0000802A                            22  
+0000802A  5C41                      23      add.w #6,d1 
+0000802C  4E75                      24      rts             
+0000802E                            25  
+0000802E                            26  
+0000802E  FFFF FFFF                 27      SIMHALT             ; halt simulator
+00008032                            28  
+00008032                            29  * Put variables and constants here
+00009000                            30      org $9000
+00009000= 0004                      31  x dc.w  4
+00009002                            32      END    START        ; last line of source
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+SOLVEQUAD           8012
+START               8000
+X                   9000

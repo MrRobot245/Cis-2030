@@ -1,0 +1,49 @@
+
+
+
+
+	ORG	$8000
+	LEA	DUART,A0
+	MOVE.W	PRELOAD,D0
+	MOVEP.W	D0,CSRA(A0)
+	MOVE.B	#$70,ACR(A0)
+	MOVE.B	#04,OPER(A0)
+	BRA	*
+
+	TRAP #14
+
+	PROGRAM 2 GIVEN
+
+	DUART	EQU	$C001
+	ISR	EQU	$A
+	STOP	EQU	$1E
+
+	LEA	DUART,A0
+LOOP	MOVE.B	ISR(A0),D0
+	BEQ	LOOP
+	TST.B	STOP(A0)
+
+
+
+
+
+	ORG	$9000
+DUART	EQU	$C001
+MR1A	EQU	8
+MR2A	EQU	12
+CSRA	EQU	26
+PRELOAD	EQU	57600
+
+	END	$8000
+
+
+
+
+
+
+
+
+*~Font name~Courier New~
+*~Font size~10~
+*~Tab type~1~
+*~Tab size~8~
